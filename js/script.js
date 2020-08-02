@@ -3,15 +3,29 @@
 // get the id
 var mycanvas = document.getElementById("mycanvas");
 
+var cont = document.getElementById("middle-container");
 
+let style = getComputedStyle(cont);
+let margintop = parseInt(style.marginTop);
+let marginbottom = parseInt(style.marginBottom);
 
 // set the height and width
-mycanvas.width = window.innerWidth;
-mycanvas.height = window.innerHeight;
+var w, h;
+h = mycanvas.height = cont.offsetHeight + marginbottom;
+w = mycanvas.width = cont.offsetWidth;
+
+console.log(`canvas height is ${mycanvas.offsetHeight + marginbottom}`);
+console.log(`canvas height is ${h}`);
+console.log(`middle-container height is ${cont.offsetHeight}`);
+
+// mycanvas.style.width = '100%';
+// mycanvas.style.height = '100%';
+
+// mycanvas.width = document.getElementById("top-container").width;
+// mycanvas.height = document.getElementById("top-container").height;
 
 // create context
 var ctx = mycanvas.getContext("2d");
-
 
 // mouse move interaction - adding event listener
 // create a mouse object
@@ -26,19 +40,19 @@ var maxRadius = 40;
 // color array
 var colors = ["red", "blue", "pink", "teal", "purple", "black", "green", "coral", "aquamarine"];
 
-window.addEventListener('mousemove', circleZoom);
+// window.addEventListener('mousemove', circleZoom);
 
-function circleZoom(e) {
-    mouse.x = e.x;
-    mouse.y = e.y;
-}
+// function circleZoom(e) {
+//     mouse.x = e.x;
+//     mouse.y = e.y;
+// }
 
 // event for resizing the window
 window.addEventListener('resize', adjustWindow);
 
 function adjustWindow() {
-    mycanvas.width = window.innerWidth;
-    mycanvas.height = window.innerHeight;
+    h = mycanvas.height = cont.offsetHeight + marginbottom;
+    w = mycanvas.width = cont.offsetWidth;
     init();
 }
 
@@ -64,11 +78,11 @@ function Circle(x, y, dx, dy, radius) {
     }
 
     this.update = function() {
-        if (this.x + radius > innerWidth || this.x - radius < 0) {
+        if (this.x + radius > w || this.x - radius < 0) {
             this.dx = -this.dx;
         }
 
-        if (this.y + radius > innerHeight || this.y - radius < 0) {
+        if (this.y + radius > h || this.y - radius < 0) {
             this.dy = -this.dy;
         }
 
@@ -98,8 +112,8 @@ function init() {
     // for loop
     for (i = 0; i < 900; i++) {
         var radius = Math.floor(Math.random() * 4 + 1);
-        var x = Math.floor(Math.random() * (innerWidth - radius * 2) + radius);
-        var y = Math.floor(Math.random() * (innerHeight - radius * 2) + radius);
+        var x = Math.floor(Math.random() * (w - radius * 2) + radius);
+        var y = Math.floor(Math.random() * (h - radius * 2) + radius);
         var dx = (Math.random() - 0.5);
         var dy = (Math.random() - 0.5);
         circleArr.push(new Circle(x, y, dx, dy, radius));
@@ -110,7 +124,7 @@ function init() {
 
 function animate() {
     requestAnimationFrame(animate);
-    ctx.clearRect(0, 0, innerWidth, innerHeight);
+    ctx.clearRect(0, 0, w, h);
 
     for (i = 0; i < circleArr.length; i++) {
         circleArr[i].update();
