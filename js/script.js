@@ -11,7 +11,7 @@ let marginbottom = parseInt(style.marginBottom);
 
 // set the height and width
 var w, h;
-h = mycanvas.height = cont.offsetHeight + marginbottom;
+h = mycanvas.height = margintop + cont.offsetHeight + marginbottom;
 w = mycanvas.width = cont.offsetWidth;
 
 console.log(`canvas height is ${mycanvas.offsetHeight + marginbottom}`);
@@ -51,7 +51,7 @@ var colors = ["red", "blue", "pink", "teal", "purple", "black", "green", "coral"
 window.addEventListener('resize', adjustWindow);
 
 function adjustWindow() {
-    h = mycanvas.height = cont.offsetHeight + marginbottom;
+    h = mycanvas.height = margintop + cont.offsetHeight + marginbottom;
     w = mycanvas.width = cont.offsetWidth;
     init();
 }
