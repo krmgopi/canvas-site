@@ -61,23 +61,17 @@ a:hover {
 }
 
 #middle-container {
-    margin: 0 0 100px 0;
-    z-index: 10;
     position: relative;
+    margin: 100px 0;
+    z-index: 10;
     background-color: #eaf6f6;
-    /* width: 100%; */
-    /* height: 100%; */
 }
 
 #mycanvas {
     position: absolute;
+    margin: -100px 0;
     z-index: -1;
-    top: 0;
     left: 0;
-    bottom: 0;
-    /* right: 0; */
-    /* width: 100%; */
-    /* height: 100%; */
 }
 
 .intro {
